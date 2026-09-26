@@ -55,13 +55,15 @@ Mean absolute gamma: average residual second-order exposure
 
 Stock turnover: total absolute number of shares traded
 
+These values were compared between the two strategies with paired t-tests 
+
 ## Assumptions and limitations
 
 This project made assumptions in all areas from obtaining data to the hedging process.
 
 Firstly, historical data was obtained from python library yfinance. This data only included closing prices and no info about options available at the time or any implied volatility. Thus, the 10-day rolling realised volatility was used to estimate the implied volatility and options were priced with their Black-Scholes price. 
 
-Additionally, in order to gamma hedge, a synthetic option market was created with puts and calls of strike prices at 0.8, 0.9, 1.0, 1.1 and 1.2 times the stock price. The time to expiration was taken to be the same expiry date as the original call option contracts. 
+Additionally, in order to gamma hedge, a synthetic option market was created with puts and calls of strike prices at 0.8, 0.9, 1.0, 1.1 and 1.2 times the stock price. The time to expiration was taken to be the same expiry date as the original call option contracts. The option chosen was the one that minimised the portfolio after the initial gamma hedge (the ATM call option was excluded to avoid this degenerate case)
 
 This project also assumed zero transaction costs due to past bid and ask as well as volume data not present. Furthermore this also assumed no dividends or arbitrage and a constant risk-free rate. All trades were done with whole stock shares.
 
@@ -69,9 +71,112 @@ The delta and gamma tolerances were chosen to be 10% the absolute initial delta 
 
 ## Example output
 
+Output for 10 30-day SHEL options from March 24 2018 to April 23 2018:
+
+| Metric             | Delta Hedge | Delta-Gamma Hedge |
+| ------------------ | ----------: | ----------------: |
+| P&L volatility     |      £42.81 |            £25.17 |
+| Hedging efficiency |      55.57% |            73.88% |
+| Mean $$\Delta$$    |       21.46 |             13.72 |
+| Mean $$\Gamma$$    |       78.32 |              2.84 |
+| Stock turnover     |         684 |               421 |
+| Option turnover    |           0 |                19 |
 
 
 ## Build and run
+
+### Requirements
+
+The project uses Python 3.14 and the following packages:
+
+* NumPy
+* Pandas
+* SciPy
+* yfinance
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+cd <your-repository-name>
+```
+
+### 2. Create a virtual environment
+
+```bash
+python3 -m venv .venv
+```
+
+Activate it on macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+The `requirements.txt` file should contain:
+
+```text
+numpy
+pandas
+scipy
+yfinance
+```
+
+Alternatively, install the packages directly:
+
+```bash
+python3 -m pip install numpy pandas scipy yfinance
+```
+
+### 4. Run the backtest
+
+Run the Delta hedging strategy:
+
+```bash
+python3 delta_hedging.py
+```
+
+Run the Delta-Gamma hedging strategy:
+
+```bash
+python3 delta_gamma_hedging.py
+```
+
+The programs download historical underlying price data using `yfinance`, generate the synthetic option market, run the hedging simulation, and output the performance metrics to the terminal.
+
+### 5. Reproducing the results
+
+The main model parameters are defined near the beginning of each script, including:
+
+```python
+ticker = "SHEL"
+r = 0.02
+contracts = 10
+multiplier = 100
+```
+
+### Troubleshooting
+
+On macOS, the Python executable may be `python3` rather than `python`. Check the installed version with:
+
+```bash
+python3 --version
+```
+
+If a package cannot be imported, install it using the same Python interpreter:
+
+```bash
+python3 -m pip install <package>
+```
+
+The project uses synthetic options rather than historical option-chain data, so the backtest only requires historical underlying price data from `yfinance`.
+
 
 ## Results
 
