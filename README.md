@@ -45,7 +45,7 @@ P&L volatility - the standard deviation of daily hedged portfolio P&L
 
 Hedging efficiency - calculated as below:
 
-$$ \text{HE} = 1 - \frac{\sigma_{hedged P\&L}}{\sigma_{unhedged P\&L}} $$
+$$\text{HE} = 1 - \frac{\sigma_{hedged P\&L}}{\sigma_{unhedged P\&L}} $$
 
 Higher values indicate a greater reduction in P&L volatility.
 
@@ -97,8 +97,8 @@ The project uses Python 3.14 and the following packages:
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
-cd <your-repository-name>
+git clone https://github.com/VJassal275/Delta-vs-gamma-hedging.git
+cd Delta-vs-gamma-hedging
 ```
 
 ### 2. Create a virtual environment
