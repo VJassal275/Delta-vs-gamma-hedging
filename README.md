@@ -45,7 +45,7 @@ P&L volatility - the standard deviation of daily hedged portfolio P&L
 
 Hedging efficiency - calculated as below:
 
-$$\text{HE} = 1 - \frac{\sigma_{hedged P\&L}}{\sigma_{unhedged P\&L}} $$
+$$\text{HE} = 1 - \frac{\sigma_{hedged}}{\sigma_{unhedged}} $$
 
 Higher values indicate a greater reduction in P&L volatility.
 
