@@ -1,8 +1,0 @@
-| Metric             | Delta Hedge | Delta-Gamma Hedge |
-| ------------------ | ----------: | ----------------: |
-| P&L volatility     |      £42.81 |            £25.17 |
-| Hedging efficiency |      55.57% |            73.88% |
-| Mean $$\Delta$$    |       21.46 |             13.72 |
-| Mean $$\Gamma$$    |       78.32 |              2.84 |
-| Stock turnover     |         684 |               421 |
-| Option turnover    |           0 |                19 |
