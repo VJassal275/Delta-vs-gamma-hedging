@@ -180,4 +180,7 @@ The project uses synthetic options rather than historical option-chain data, so 
 
 ## Results
 
+Using paired t-test with H0 no difference in :
+
+
 ## Conclusion
