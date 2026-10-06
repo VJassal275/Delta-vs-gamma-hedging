@@ -63,9 +63,9 @@ This project made assumptions in all areas from obtaining data to the hedging pr
 
 Firstly, historical data was obtained from python library yfinance. This data only included closing prices and no info about options available at the time or any implied volatility. Thus, the 10-day rolling realised volatility was used to estimate the implied volatility and options were priced with their Black-Scholes price. Option start dates were randomly chosen from the set of weekdays in the last 10 years.
 
-Additionally, in order to gamma hedge, a synthetic option market was created with puts and calls of strike prices at 0.8, 0.9, 1.0, 1.1 and 1.2 times the stock price. The time to expiration was taken to be the same expiry date as the original call option contracts. The option chosen was the one that minimised the portfolio after the initial gamma hedge (the ATM call option was excluded to avoid this degenerate case)
+Additionally, in order to gamma hedge, a synthetic option market was created with puts and calls of strike prices at 0.8, 0.9, 1.0, 1.1 and 1.2 times the stock price. The time to expiration was taken to be the same expiry date as the original call option contracts. The option chosen was the one that minimised the portfolio after the initial gamma hedge (the ATM call option was excluded to avoid this degenerate case). The same initial gamma-hedging option was used to gamma hedge for the remainder of the option contract.
 
-This project also assumed zero transaction costs due to past bid and ask as well as volume data not present. Furthermore this also assumed no dividends or arbitrage and a constant risk-free rate. All trades were done with whole stock shares.
+This project also assumed zero transaction costs due to no order book data being available. Furthermore this also assumed no dividends or arbitrage and a constant risk-free rate. All trades were done with whole stock shares.
 
 The delta and gamma tolerances were chosen to be 10% the absolute initial delta and gamma values as an arbitrary threshold
 
