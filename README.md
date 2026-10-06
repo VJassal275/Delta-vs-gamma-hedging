@@ -61,7 +61,7 @@ These values were compared between the two strategies with paired t-tests
 
 This project made assumptions in all areas from obtaining data to the hedging process.
 
-Firstly, historical data was obtained from python library yfinance. This data only included closing prices and no info about options available at the time or any implied volatility. Thus, the 10-day rolling realised volatility was used to estimate the implied volatility and options were priced with their Black-Scholes price. 
+Firstly, historical data was obtained from python library yfinance. This data only included closing prices and no info about options available at the time or any implied volatility. Thus, the 10-day rolling realised volatility was used to estimate the implied volatility and options were priced with their Black-Scholes price. Option start dates were randomly chosen from the set of weekdays in the last 10 years.
 
 Additionally, in order to gamma hedge, a synthetic option market was created with puts and calls of strike prices at 0.8, 0.9, 1.0, 1.1 and 1.2 times the stock price. The time to expiration was taken to be the same expiry date as the original call option contracts. The option chosen was the one that minimised the portfolio after the initial gamma hedge (the ATM call option was excluded to avoid this degenerate case)
 
@@ -183,9 +183,14 @@ The project uses synthetic options rather than historical option-chain data, so 
 Since the purpose of hedging is to reduce overall price movement (particularly with adverse price movements), this should directly decrease P&L volatility and consequently increase hedging efficiency. Furthermore, since gamma is the rate of change of delta, gamma hedging should indirectly reduce the absolute delta by limiting how quick delta can change. Finally gamma hedging may or may not move the portfolio towards delta neutrality, hence we can expect a change in the stock turnover with gamma hedging, however the direction of change is unknown. This gives rise to the following null and alternative hypotheses. A paired t-test was naturally chosen for comparing values for the same backtest for the two hedging algorithms
 
 H0: no difference in P&L volatility, hedging efficiency, mean abs Δ, stock turnover
+
 H1: decreases in P&L volatility, mean abs Δ and increase in hedging efficiency, change in stock turnover:
 
-P&L volatility decreased on average by 
+P&L volatility decreased on average by 21%
+Hedging efficiency increased on average by 24%
 
+Statistical significant differences across all t-tests (p < 0.05)
 
 ## Conclusion
+
+Overall this project was successful in producing expected results from delta and delta-gamma hedging strategies, however the simplicity in the model used questions its applicability to real life. There are many more projects that can result from this one, such as varying the delta and gamma tolerances or even implementing a dynamic tolerance system. A possible method of this could be to manually collect market data for 30 days including order book data, available options, and not relying on historical stock volatility to estimate implied volatility. One can also introduce more and higher order Greeks to allow more re-hedging conditions that were not accounted for in this system. 
