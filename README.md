@@ -180,7 +180,12 @@ The project uses synthetic options rather than historical option-chain data, so 
 
 ## Results
 
-Using paired t-test with H0 no difference in :
+Since the purpose of hedging is to reduce overall price movement (particularly with adverse price movements), this should directly decrease P&L volatility and consequently increase hedging efficiency. Furthermore, since gamma is the rate of change of delta, gamma hedging should indirectly reduce the absolute delta by limiting how quick delta can change. Finally gamma hedging may or may not move the portfolio towards delta neutrality, hence we can expect a change in the stock turnover with gamma hedging, however the direction of change is unknown. This gives rise to the following null and alternative hypotheses. A paired t-test was naturally chosen for comparing values for the same backtest for the two hedging algorithms
+
+H0: no difference in P&L volatility, hedging efficiency, mean abs Δ, stock turnover
+H1: decreases in P&L volatility, mean abs Δ and increase in hedging efficiency, change in stock turnover:
+
+P&L volatility decreased on average by 
 
 
 ## Conclusion
